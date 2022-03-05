@@ -1,0 +1,79 @@
+{
+  "version": "0.1.0",
+  "name": "fibonacci",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "fibonacci",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "increment",
+      "accounts": [
+        {
+          "name": "fibonacci",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Fibonacci",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "firstTerm",
+            "type": "u8"
+          },
+          {
+            "name": "secondTerm",
+            "type": "u8"
+          },
+          {
+            "name": "fib",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "IntegerOverflow",
+      "msg": "Fibonacci can only hold integer values up to ur mom"
+    }
+  ],
+  "metadata": {
+    "address": "AzhpMgr3apBd5K3WzLMWZudHjhMPoxfH6qACrRNUPBvp"
+  }
+}
