@@ -70,7 +70,7 @@
     {
       "code": 6000,
       "name": "IntegerOverflow",
-      "msg": "Fibonacci can only hold integer values up to ur mom"
+      "msg": "Fibonacci can only hold integer values up to 2^8 - 1 = 255"
     }
   ],
   "metadata": {

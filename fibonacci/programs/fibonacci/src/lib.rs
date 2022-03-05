@@ -2,8 +2,6 @@ use anchor_lang::prelude::*;
 
 declare_id!("AzhpMgr3apBd5K3WzLMWZudHjhMPoxfH6qACrRNUPBvp");
 
-// const MAXIMUM_SIZE: u8 = u8::MAX;
-
 #[program]
 pub mod fibonacci {
     use super::*;
@@ -18,11 +16,11 @@ pub mod fibonacci {
     pub fn increment(ctx: Context<Increment>) -> Result<()> {
         let fibonacci = &mut ctx.accounts.fibonacci;
 
-        match fibonacci.first_term.checked_add(fibonacci.second_term) {
+        match fibonacci.safely_generate_next_fibonacci() {
             None =>
                 err!(FibonacciError::IntegerOverflow),
             Some(result) =>
-                fibonacci.generate(result),
+                fibonacci.store(result),
         }
     }
 }
@@ -53,13 +51,17 @@ pub struct Fibonacci {
 }
 
 impl Fibonacci {
+    fn safely_generate_next_fibonacci(&mut self) -> Option<u8> {
+        self.first_term.checked_add(self.second_term)
+    }
+
     fn initialize(&mut self) -> Result<()> {
         self.first_term = 0;
         self.second_term = 1;
         Ok(())
     }
 
-    fn generate(&mut self, fib: u8) -> Result<()> {
+    fn store(&mut self, fib: u8) -> Result<()> {
             self.fib = fib;
             self.first_term = self.second_term;
             self.second_term = self.fib;
@@ -69,6 +71,7 @@ impl Fibonacci {
 
 #[error_code]
 pub enum FibonacciError {
-    #[msg("Fibonacci can only hold integer values up to ur mom")]
+    // Would have liked to interpolate the string to u8::MAX, but compiler doesn't seem to like it
+    #[msg("Fibonacci can only hold integer values up to 2^8 - 1 = 255")]
     IntegerOverflow
 }
