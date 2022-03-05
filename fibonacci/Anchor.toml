@@ -1,7 +1,7 @@
 [features]
 seeds = false
 [programs.localnet]
-fibonacci = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+fibonacci = "AzhpMgr3apBd5K3WzLMWZudHjhMPoxfH6qACrRNUPBvp"
 
 [registry]
 url = "https://anchor.projectserum.com"
