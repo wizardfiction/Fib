@@ -84,14 +84,4 @@ describe("fibonacci", () => {
       expect(error.code).to.equal(6000);
     }
   })
-
-  // it("is an error", async () => {
-
-  //   await program.rpc.increment({
-  //     accounts: {
-  //       fibonacci: fibonacci.publicKey
-  //     }
-  //   });
-  // });
-
 });

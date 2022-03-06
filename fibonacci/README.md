@@ -20,8 +20,6 @@ Advantages of this approach:
 
 - A client can directly access the nth fibonacci number F(n), rather than starting at F(0).
   
-- Multiple clients can independently read fibonacci numbers from our program. For example, client x can access F(n), while client y can access F(m).
-
 Disadvantages to this approach:
 
 - Calculating F(n) with simple recursion becomes computationally infeasable rather quickly. Solana programs are constrained to a [call depth](https://docs.solana.com/developing/on-chain-programs/overview#call-depth) of 64 stack frames, limiting our program's ability to calculate fibonacci numbers for anything beyond very small values of n.

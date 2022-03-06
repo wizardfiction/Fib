@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-declare_id!("AzhpMgr3apBd5K3WzLMWZudHjhMPoxfH6qACrRNUPBvp");
+declare_id!("7XMEmVc873gosEt5XAha2X7oPtVqb5K68xpGSwtCx6AQ");
 
 #[program]
 pub mod fibonacci {
@@ -51,14 +51,14 @@ pub struct Fibonacci {
 }
 
 impl Fibonacci {
-    fn safely_generate_next_fibonacci(&mut self) -> Option<u8> {
-        self.first_term.checked_add(self.second_term)
-    }
-
     fn initialize(&mut self) -> Result<()> {
         self.first_term = 0;
         self.second_term = 1;
         Ok(())
+    }
+
+    fn safely_generate_next_fibonacci(&mut self) -> Option<u8> {
+        self.first_term.checked_add(self.second_term)
     }
 
     fn store(&mut self, fib: u8) -> Result<()> {

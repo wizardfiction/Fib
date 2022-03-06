@@ -1,0 +1,14 @@
+version: '3'
+services:
+  localnet:
+    image: "solanalabs/solana:stable"
+    ports:
+      - "8899:8899"
+      - "8900:8900"
+      - "9900:9900"
+  anchor:
+    depends_on:
+      - localnet
+    build: .
+    ports:
+      - "3000:3000"
