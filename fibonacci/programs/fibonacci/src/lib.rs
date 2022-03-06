@@ -13,10 +13,10 @@ pub mod fibonacci {
         fibonacci.initialize()
     }
 
-    pub fn increment(ctx: Context<Increment>) -> Result<()> {
+    pub fn generate_term(ctx: Context<GenerateTerm>) -> Result<()> {
         let fibonacci = &mut ctx.accounts.fibonacci;
 
-        match fibonacci.safely_generate_next_fibonacci() {
+        match fibonacci.safely_generate_next_term() {
             None =>
                 err!(FibonacciError::IntegerOverflow),
             Some(result) =>
@@ -35,7 +35,7 @@ pub struct Initialize<'info> {
 }
 
 #[derive(Accounts)]
-pub struct Increment<'info> {
+pub struct GenerateTerm<'info> {
     #[account(mut, has_one = authority)]
     pub fibonacci: Account<'info, Fibonacci>,
     pub authority: Signer<'info>,
@@ -57,7 +57,7 @@ impl Fibonacci {
         Ok(())
     }
 
-    fn safely_generate_next_fibonacci(&mut self) -> Option<u8> {
+    fn safely_generate_next_term(&mut self) -> Option<u8> {
         self.first_term.checked_add(self.second_term)
     }
 
@@ -72,6 +72,6 @@ impl Fibonacci {
 #[error_code]
 pub enum FibonacciError {
     // Would have liked to interpolate the string to u8::MAX, but compiler doesn't seem to like it
-    #[msg("Fibonacci can only hold integer values up to 2^8 - 1 = 255")]
+    #[msg("This program can only generate integer values up to 2^8 - 1 = 255")]
     IntegerOverflow
 }

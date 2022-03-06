@@ -33,7 +33,7 @@ async function main(iterations) {
 
   // Benchmarks the generator
 
-  await benchmark(iterations, increment, [fibonacci, program]);
+  await benchmark(iterations, generateTerm, [fibonacci, program]);
 
 }
 
@@ -48,16 +48,16 @@ async function initialize(fibonacci, program) {
   });
 }
 
-async function increment(fibonacci, program) {
+async function generateTerm(fibonacci, program) {
     // generate next fibonacci number
-    await program.rpc.increment({
+    await program.rpc.generateTerm({
       accounts: {
         fibonacci: fibonacci.publicKey,
         authority: program.provider.wallet.publicKey,
       }
     })
     
-    // read account data
+    // read fibonacci number
     await program.account.fibonacci.fetch(fibonacci.publicKey);
 }
 
