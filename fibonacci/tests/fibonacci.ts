@@ -53,7 +53,7 @@ describe("fibonacci", () => {
     let fibonacciAccount;
 
     for(let i = 1; i <= n; i++) {
-      await program.rpc.increment({
+      await program.rpc.generateTerm({
         accounts: {
           fibonacci: fibonacci.publicKey,
           authority: program.provider.wallet.publicKey
@@ -72,7 +72,7 @@ describe("fibonacci", () => {
 
   it("Returns an IntegerOverflow error on the next fibonacci number", async () => {
     try {
-      await program.rpc.increment({
+      await program.rpc.generateTerm({
         accounts: {
           fibonacci: fibonacci.publicKey,
           authority: program.provider.wallet.publicKey
