@@ -83,7 +83,8 @@ $ anchor deploy
 $ ANCHOR_WALLET=<YOUR-KEYPAIR-PATH> node client.js <number of iterations>
 ```
 
-***NOTE**: You will need to copy the program_id from the deploy step and paste it in place of <Program_ID> in client.js*
+***NOTE**: You will need to update program id in both Anchor.toml and lib.ts after building*
+***ANOTHER NOTE**: You will need to copy the program_id from the deploy step and paste it in place of <Program_ID> in client.js*
 
 In order to test performance of my program with a meaningfully large number of iterations, I temporarily adjusted the data on my fibonacci account from `u8` to to `u128`.
 
